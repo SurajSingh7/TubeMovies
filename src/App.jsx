@@ -1,8 +1,13 @@
 import "./App.css";
+import { Navigation } from "./components/common/Navigation";
 
 function App() {
   return (
-   <div>TubeMovies</div>
+   <div>TubeMovies
+
+     <Navigation/>  
+   </div>
+   
   );
 }
 
