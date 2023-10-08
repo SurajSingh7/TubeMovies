@@ -6,6 +6,7 @@ import cartReducer from "../slices/cartSlice"
 import PaginationSlice from "../slices/PaginationSlice";
 import MoviesFilterSlice from "../slices/MoviesFilterSlice";
 import SearchTextSlice from "../slices/SearchTextSlice";
+import urlData from "../slices/urlData";
 
 
 const rootReducer  = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer  = combineReducers({
     cart:cartReducer,
     pagination:PaginationSlice,
     filter:MoviesFilterSlice,
-    searchText:SearchTextSlice
+    searchText:SearchTextSlice,
+    urlData:urlData,
 })
 
 

@@ -9,7 +9,7 @@ export function filterData(searchText, movies) {
   export function filterDataType(searchText, movies) {
   
     const filterDataType = movies.filter((movie) =>
-      movie?.movieType?.toLowerCase().includes(searchText?.toLowerCase())
+      movie?.category?.toLowerCase().includes(searchText?.toLowerCase())
     );
     return filterDataType;
   }

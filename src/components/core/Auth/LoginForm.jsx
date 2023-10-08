@@ -30,6 +30,8 @@ function LoginForm() {
   }
 
   return (
+    <>
+    <div className="h-10"></div>
     <form
       onSubmit={handleOnSubmit}
       className="mt-6 flex w-full flex-col gap-y-4"
@@ -86,12 +88,14 @@ function LoginForm() {
       </label>
       <button
         type="submit"
-        className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+        className="mt-6 rounded-[8px] bg-[#0f9d58] py-[8px] px-[12px] font-bold text-[#fff]"
       >
-        Sign In
+        Login
       </button>
-      <div className="h-3"></div>
+      <div className="h-10"></div>
     </form>
+
+    </>
   )
 }
 

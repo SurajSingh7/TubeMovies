@@ -13,13 +13,25 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 
-
+import Contact from "./pages/Contact";
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/core/Auth/PrivateRoute.jsx";
 
 import Error from "./pages/Error"
-// import Settings from "./components/core/Dashboard/Settings";
+import Settings from "./components/core/Dashboard/Settings";
 import {useSelector } from "react-redux";
 
+
+import Cart from "./components/core/Dashboard/Cart";
+import { ACCOUNT_TYPE } from "./utils/constants";
 import { WatchMovie } from "./pages/WatchMovie";
+import { AddMovie } from "./components/core/Dashboard/AddMovie/AddMovie";
+import { Category } from "./pages/Category";
+import { YouttubePlayer } from "./pages/YouttubePlayer";
+
+
+
 
 
 function App() {
@@ -35,6 +47,8 @@ function App() {
     <Routes>
 
       <Route path="/" element={<Home/>} />
+      <Route path="/category/:name" element={<Category/>} />
+      
       <Route path="movie/:movieId" element={<WatchMovie/>} />
       
 
@@ -43,6 +57,7 @@ function App() {
       <Route path="signup"
        element={<OpenRoute>  <Signup/> </OpenRoute>} 
        />
+
        
       <Route path="login" 
       element={<OpenRoute>  <Login/>  </OpenRoute> } 
@@ -60,6 +75,38 @@ function App() {
       element={<OpenRoute>  <ForgotPassword /></OpenRoute>} 
       />
 
+
+
+
+      <Route path="/contact" element={<Contact/>} />
+      <Route path="/youtube-video-player" element={<YouttubePlayer/>} />
+
+   
+     <Route  element={ <PrivateRoute> <Dashboard /> </PrivateRoute> }>
+
+        <Route path="dashboard/my-profile" element={<MyProfile />} />
+        <Route path="dashboard/Settings" element={<Settings />} />
+       {
+         user?.accountType === ACCOUNT_TYPE.STUDENT && (
+           <>
+           <Route path="dashboard/add-to-favorite" element={<div>suraj singh</div>} />
+           <Route path="dashboard/network-stream" element={<div>suraj singh</div>} />
+          </>
+         )
+       }
+
+     {
+        user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+          <>
+          <Route path="dashboard/add-movie" element={  <AddMovie/> }  />
+          </>
+        )
+      }
+    
+    </Route>
+
+
+    
       <Route path="*" element={<Error />} />
 
 

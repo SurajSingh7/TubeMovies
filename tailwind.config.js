@@ -131,13 +131,6 @@ module.exports = {
         maxContentTab: "650px"
       },
     },
-
-      // screens: {
-      //   'xs': '475px',
-      //   ...defaultTheme.screens,
-      // },
-  
-
   },
   plugins: [],
 };

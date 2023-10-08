@@ -37,6 +37,7 @@ export const settingsEndpoints = {
 // CREATE MOVIE API
 export const  createMovieEndpoint = {
   CREATEMOVIE_API: BASE_URL + "/movie/create",
+  GETMOVIES_API:BASE_URL+ "/movie/getAllMovies",
 }
 
 

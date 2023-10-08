@@ -1,34 +1,34 @@
 export const NavigationLink = [
     {
-      title: "ALL",
-      path: "/",
+      title: "ALL IN ONE",
+      path: "/category/all9",
     },
     {   
       title: "BOLLWOOD MOVIES",
-      path: '/bollwoodMovies',
+      path: '/category/bollwoodMovies1',
     },
     {
       title: "SOUTH HINDI DUBBED",
-      path: "/southHindiDubbed",
+      path: "/category/southHindiDubbed2",
     },
     {
       title: "POPULAR MOVIES",
-      path: "/popularMovies",
+      path: "/category/popularMovies3",
     },
     {   
     title: "OLD IS GOLD ",
-    path: '/oldIsGoldMovies',
+    path: '/category/oldIsGoldMovies4',
     },
     {
     title: "HOLLYWOOD(HINDI)",
-    path: "/hollywoodHindi",
+    path: "/category/hollywoodHindi5",
     },
     {
         title: "ANIMATION MOVIES ",
-        path: "/animationMovies",
+        path: "/category/animationMovies6",
     },
     {
       title: "HINDI DUBBED MOVIES",
-      path: "/hindiDubbedMovies",
+      path: "/category/hindiDubbedMovies7",
     },
   ];

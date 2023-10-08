@@ -1,12 +1,6 @@
 
-export const TypeMovieObj={
-    1:"BOLLYWOOD MOVIES",
-    2:"SOUTH HINDI DUBBED",
-    3:"POPULAR MOVIES",
-    4:"WEB SERIES",
-    5:"OLD IS GOLD MOVIES",
-    6:"HOLLYWOOD(HINDI)"
-  };
+export const movieCategoryName=["All In One","Bollwood","South Hindi","Popular Movies","Old Is Gold","Hollywood","Animation Movies","Hindi Dubbed"];
+
   
   // id,name,image,url,movieType
   export const moviesList=[

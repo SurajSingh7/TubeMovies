@@ -20,10 +20,13 @@ export function sendOtp(email, navigate) {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
-      const response = await apiConnector("POST", SENDOTP_API, {
+
+
+      const response = await apiConnector("POST", SIGNUP_API, {
         email,
         checkUserPresent: true,
       })
+
       console.log("SENDOTP API RESPONSE............", response)
       
       console.log(response);

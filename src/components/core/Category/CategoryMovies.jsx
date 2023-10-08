@@ -55,7 +55,7 @@ export const CategoryMovies = ({movieText}) => {
 
 
   return (
-    <div>
+    <div className='mt-5'>
 
 
 

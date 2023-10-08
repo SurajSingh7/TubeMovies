@@ -49,7 +49,7 @@ const Body=()=>{
     return (allMovies.length==0)?<Shimmer/>: (
        
        <>
-       <div className=" border-2 border-pink-200">
+       <div className="mt-5">
      
 
       {/* <div className="search-container p-6 h-8 bg-pink-50  items-center flex justify-center "> */}
@@ -60,9 +60,16 @@ const Body=()=>{
       <div className="bg-richblack-600 w-[93%] m-1 mx-12 flex justify-center items-center h-[0.1px]"></div> */}
 
   
-      {(dataEmptyError!="")?<div className="error-container">{dataEmptyError}</div>:""}
+      {(dataEmptyError!="")&&
 
+       
+       <div className=" h-52 text-richblack-50  mx-10 items-center flex justify-center text-center  shadow-[2px_-1px_10px_-2px] shadow-blue-200 error-container">
+        {dataEmptyError}🤔</div> 
 
+       }
+       
+
+       {(dataEmptyError=="") &&
         <div className="flex flex-wrap  justify-center   sm:justify-center  xl:justify-evenly items-center text-center ">
 
                       {
@@ -75,6 +82,8 @@ const Body=()=>{
                       })
                     }
         </div>
+
+       }
 
              {/* pagegination */}
           {

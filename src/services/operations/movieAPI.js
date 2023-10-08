@@ -7,8 +7,6 @@ import { createMovieEndpoint } from "../apis";
 const { CREATEMOVIE_API } = createMovieEndpoint;
 
 
-
-
 export function createMovie( linkType, name, url, image,category,navigate )
 
   {
@@ -18,20 +16,24 @@ export function createMovie( linkType, name, url, image,category,navigate )
 
       try {
         const response = await apiConnector("POST", CREATEMOVIE_API, {linkType, name, url, image,category })
-  
+   
+    
         console.log("CREATE MOVIE API RESPONSE............", response)
   
         if (!response.data.success) {
           throw new Error(response.data.message)
         }
         toast.success("Movie create Successful")
-        navigate("/login")
+        // navigate("/login")
       } catch (error) {
         console.log("CREATE MOVIE API ERROR............", error)
-        toast.error("Movie Create Failed")
-        navigate("/signup")
+        toast.error("Movie Creation Failed")
+        // navigate("/signup")
       }
       dispatch(setLoading(false))
       toast.dismiss(toastId)
     }
   }
+
+
+  

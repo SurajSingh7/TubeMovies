@@ -11,9 +11,7 @@ const SearchTextSlice=createSlice({
         setSearchText(state, value) {
             state.searchText = value.payload;
           },
-
     }
-
 
 })
 

@@ -6,15 +6,14 @@ import { useNavigate } from "react-router-dom"
 
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
-import { ACCOUNT_TYPE } from "../../../utils/constants"
-import Tab from "../../common/Tab"
+
 
 function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   // student or instructor
-  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+  const [accountType, setAccountType] = useState("Student");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -67,28 +66,14 @@ function SignupForm() {
       password: "",
       confirmPassword: "",
     })
-    setAccountType(ACCOUNT_TYPE.STUDENT)
+    setAccountType("Student");
   }
 
-  // data to pass to Tab component
-  const tabData = [
-    {
-      id: 1,
-      tabName: "Student",
-      type: ACCOUNT_TYPE.STUDENT,
-    },
-    {
-      id: 2,
-      tabName: "Instructor",
-      type: ACCOUNT_TYPE.INSTRUCTOR,
-    },
-  ]
 
   return (
     <div>
-      {/* Tab */}
-      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
-
+      
+       <div className="h-5"></div>
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
@@ -207,14 +192,14 @@ function SignupForm() {
         </div>
         <button
           type="submit"
-          className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+          className="mt-6 rounded-[8px] bg-[#0f9d58] py-[8px] px-[12px]  text-[#fff] font-bold"
         >
-          Create Account
+          Sign Up
         </button>
-        <div className="h-8"></div>
+        <div className="h-3"></div>
       </form>
     </div>
   )
 }
 
-export default SignupForm
+export default SignupForm;

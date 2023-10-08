@@ -1,54 +1,82 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {  useParams } from 'react-router-dom'
 
-import Shimmer from "../components/common/Shimmer";
-import useStreamLink from "../utils/useStreamLink";
-import { moviesList } from "../utils/constant";
+
+import { apiConnector } from '../services/apiconnector';
+import { createMovieEndpoint } from '../services/apis';
+import { useDispatch, useSelector } from 'react-redux';
+import { UrlNetworkStream } from '../components/core/WatchMovie/UrlNetworkStream';
+import HighlightText from '../components/core/WatchMovie/HighLightText';
+import RandomMovies from '../components/core/WatchMovie/RandomMovies';
+import Footer from '../components/common/Footer';
+import { setUrlData } from '../slices/urlData';
+import Shimmer from '../components/common/Shimmer';
+
 
 
 
 export const WatchMovie = () => {
 
   const {movieId}=useParams();
+  const [movie,setMovie]=useState(null);
 
-  const movie=moviesList[movieId];
+  useEffect(()=>{
+
+   (async function getMovies() {
+    try {
+
+     const res = await apiConnector("GET", createMovieEndpoint.GETMOVIES_API);
+     const movieData=res?.data?.data?.filter( (movie) => movie?._id=== movieId )[0];
+     setMovie(movieData);
+
+    } catch (error) {
+      console.log(error);
+    }
+  })();
+
+},[movieId,movie]);
+
+
 
 // id,name,image,url,movieType,
-  const url=movie?.url;
-  const LinkType=movie?.linkType;
+  const linkType=movie?.linkType;
   const image=movie?.image;
   const movieName=movie?.name;
   let link="";
-
-  const urlInfo=useStreamLink(url);
-
-  if(LinkType=="youtube"){
-     link=urlInfo?.formats[2]?.url;
-  }
-
-  // link=urlInfo?.formats[2]?.url;
-  if(LinkType=="other"){
-     link=url;
-  }
  
-  console.log(link,"su23");
+  const {urlData} = useSelector((state)=>state.urlData);
 
+
+  if(linkType=="Youtube"){
+     link=urlData?.formats[2]?.url;
+  }else{
+    link=movie?.url;
+  }
+
+ 
   
- if(!movie) return ( <Shimmer />);
+if(!movie) 
+   return (<div> 
+      <div className='bg-richblack-800 h-8 animate-pulse'></div>
+      <div className='bg-richblack-700 h-8 animate-pulse'></div>
+      <Shimmer/>
+     </div>);
 
 
   return (
+    <>
     <div className=' mx-auto   flex w-11/12  max-w-maxContent flex-col justify-between '>
     
+   { (movie?.url && linkType=="Youtube") && < UrlNetworkStream url={movie?.url} />}
+
    {/*sec-1 path */}
-     <div className='mt-3 mb-7 text-richblack-100 font-extrabold text-xl flex   justify-center items-center ' >{movieName}</div>
+     <div className='mt-3 mb-7 text-richblack-100 font-extrabold text-xl flex   justify-center items-center ' >
+        <HighlightText text={movieName}/>
+      </div>
      
      {/* sec-2 video */}
      <div className='  shadow-[10px_-5px_15px_-5px] shadow-richblack-800 bg-richblack-900'>
 
-
-
-        
 
            <div className=" justify-between text-center flex items-start  flex-row-reverse  bg-richblack-900" >
                
@@ -66,7 +94,7 @@ export const WatchMovie = () => {
                </div>
 
                 {/* video */}
-               <div className=' border-b-pure-greys-800  hover:border-2 hover:border-richblack-600 bg-pink-200'>
+               <div className=' border-b-pure-greys-800  border-2 border-richblack-500 '>
                     <video controls= "controls" id="player" tabindex="0"  muted poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
                      autoplay="autoplay" loop="loop"  width="100%" src={link} >
                    </video>
@@ -85,16 +113,12 @@ export const WatchMovie = () => {
         </div>
     </div>
      
-
-
-     {/* <div className='h-24 bg-black'></div> */}
-
-
-
-
+     <RandomMovies/>
+ 
       </div>
+          <Footer />
 
-    
+   </>
 
 
   )

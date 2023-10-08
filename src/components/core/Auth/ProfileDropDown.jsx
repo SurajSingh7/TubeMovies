@@ -53,7 +53,7 @@ export default function ProfileDropdown() {
           src={user?.image}
           ref={imgRef} onClick={() => setOpen(!open)}
           alt={`profile-${user?.firstName}`}
-          className="aspect-square w-[30px] rounded-full object-cover "
+          className="aspect-square w-[36px] rounded-full object-cover "
         />
 
         {/* <div  className="text-sm text-richblack-100" > */}
@@ -74,7 +74,7 @@ export default function ProfileDropdown() {
       {open && (
         <div
           // onClick={(e) => e.stopPropagation()}
-          className="absolute top-[155%] right-[-90%]  md:top-[170%]  md:right-[-5%] z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-richblack-800"
+          className="absolute top-[125%] right-[-90%]  md:top-[125%]  md:right-[-5%] z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-richblack-800"
           
         >
 
