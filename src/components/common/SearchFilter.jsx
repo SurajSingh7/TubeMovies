@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDataEmptyError, setFilter } from "../../slices/MoviesFilterSlice";
 import { setPage } from '../../slices/PaginationSlice';
 import { setSearchText } from '../../slices/SearchTextSlice';
+import { apiConnector } from '../../services/apiconnector';
+import { createMovieEndpoint } from '../../services/apis';
 
 export const SearchFilter = ({flag}) => {
 
@@ -21,9 +23,16 @@ export const SearchFilter = ({flag}) => {
 
         (async function getMovies() {
          try {
+
+
+          const res = await apiConnector("GET", createMovieEndpoint.GETMOVIES_API);
+          const Allmovies=res?.data?.data;
+
+          setAllMovies(Allmovies);
+          dispatch(setFilter(Allmovies));
            
-           setAllMovies(moviesList);
-           dispatch(setFilter(moviesList));
+          //  setAllMovies(moviesList);
+          //  dispatch(setFilter(moviesList));
            
          } catch (error) {
            console.log(error);
@@ -41,22 +50,16 @@ export const SearchFilter = ({flag}) => {
             dispatch(setFilter(data));
             
 
-                console.log("suraj singh issue.............",filteredMovies)
-
-            //  setErrorMessage("");
                 dispatch(setDataEmptyError(""));
                 if (data.length === 0) {
-            //  setErrorMessage(
-            // `Sorry, we couldn't find any results for "${searchText}"`
-            //    );
+         
 
                 dispatch(setDataEmptyError(`Sorry, we couldn't find any results for "${searchText}"`));
                 } 
             }
                 else {
-            // setErrorMessage("");
+     
             dispatch(setDataEmptyError(""));
-            // setFilteredMovies(movies);
             dispatch(setFilter(movies));
             
 
@@ -66,13 +69,13 @@ export const SearchFilter = ({flag}) => {
 
   return (
 
-    <>
+    <div className='-mt-1'>
     
     {(flag =="2")?
 
     <div className=" p-6 h-8  items-center flex justify-center ">
 
-        <input type="text" className="search-input     w-[75%]  sm:w-[65%]   md:w-[50%]   lg:w-[36%]  rounded-none h-8 flex  outline-none" placeholder="  Search movies here..."
+        <input type="text" className="  w-[75%]  sm:w-[65%]   md:w-[50%] outline-none  lg:w-[36%]  rounded-none h-8 flex " placeholder="  Search movies here..."
          value={searchText}   onChange={(e)=>{ 
           dispatch(setSearchText(e.target.value)); 
           searchData(e.target.value, allMovies);
@@ -80,7 +83,7 @@ export const SearchFilter = ({flag}) => {
 
           }} />
 
-        <button className="p-1  bg-gray-500   font-extrabold rounded-none   bg-caribbeangreen-200 text-black  " onClick={()=>{  
+        <button className="p-[4.4px]  bg-gray-500    font-bold rounded-none   bg-[#0f9d58] hover:bg-caribbeangreen-500 text-[#fff]  " onClick={()=>{  
         searchData(searchText, allMovies);
 
         }}>  Search</button>
@@ -89,9 +92,9 @@ export const SearchFilter = ({flag}) => {
 
     : 
 
-    <div className=" p-6 h-2=8  items-center flex justify-center ">
+    <div className=" p-6 mt-2 h-2 items-center flex justify-center ">
 
-        <input type="text" className="bg-richblack-25 border-none rounded-lg outline-2 h-7 hidden lg:flex lg:w-44 xl:w-48 " placeholder="  Search movies here..."
+        <input type="text" className="bg-richblack-25 border-none rounded-lg outline-1 h-7 hidden lg:flex lg:w-44 xl:w-48 " placeholder="  Search movies here..."
          value={searchText}  onChange={(e)=>{ 
           dispatch(setSearchText(e.target.value)); 
           searchData(e.target.value, allMovies);
@@ -103,7 +106,8 @@ export const SearchFilter = ({flag}) => {
     }
 
 
-    </>
+    </div>
+   
 
 
 

@@ -47,7 +47,7 @@ function Navbar() {
     
       {/* #00FFFF */}
     <div
-      className={` flex-row md:flex h-[63px] md:h-[56px] items-center justify-center border-b-[0px] border-b-richblack-700
+      className={` flex h-[56px] items-center justify-center border-b-[0px] border-b-richblack-700
       fixed z-50 top-0 left-0 w-full 
       ${location.pathname !== "/" ? "bg-richblack-900" : "bg-richblack-900"} 
         transition-all duration-200 shadow-[10px_-5px_15px_-5px] shadow-white` }
@@ -123,10 +123,10 @@ function Navbar() {
         </div>
         
       
-        <button className="flex justify-center items-center0 md:hidden"
+        <button className="flex justify-center items-center md:hidden"
           onClick={handleCrossButton}
         >
-           {(isClose)?<ImCross fontSize={36} fill="#AFB2BF" />: <AiOutlineMenu fontSize={36} fill="#AFB2BF" /> }
+           {(isClose)?<ImCross fontSize={30} fill="#AFB2BF" />: <AiOutlineMenu fontSize={36} fill="#AFB2BF" /> }
         </button>
 
        {isClose && <SmallScreenNavbar  isClose={isClose} handleCrossButton={handleCrossButton} />}

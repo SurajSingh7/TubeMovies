@@ -13,7 +13,7 @@ const MovieCard= ({
 
 
       {/* For pc */}
-      <div className="  hidden lg:block   mb-5 mt-3  w-52 h-[350px]   m-3 xl:m-3  rounded-lg p-1  shadow-2xl bg-richblack-800 ">
+      <div className="hidden lg:block   mb-5 mt-3  w-52 h-[350px]   m-3 xl:m-3  rounded-lg p-1  shadow-2xl bg-richblack-800 ">
          
         <div className="hover:m-1">
         <img className=" w-[200px] h-[300px] items-center"  src={image} />

@@ -1,15 +1,24 @@
+
 const Shimmer =()=>{
     return(
        
         <>
-        <div className="search-container p-6 h-8 bg-gray-200  items-center flex justify-center "> </div>
-        
-        <div className=" flex flex-wrap justify-center">
-           { Array(15).fill("").map((e,index)=> { return (
-           <div key={index} className="card w-56 h-80 p-2 m-2 shadow-lg bg-gray-300"></div>)} ) }
+    
+        <div className=" flex flex-wrap  justify-center   sm:justify-center  xl:justify-evenly items-center text-center">
+           {   Array(20).fill("").map(   (e,index)=> { return (
+               <div key={index} className="animate-pulse mt-5"> 
+                
+                    <div className="hidden lg:block   mb-5 mt-3  w-52 h-[350px]   m-3 xl:m-3  rounded-lg p-1  shadow-2xl bg-richblack-700 "></div>
+                    <div className=" hidden md:block  w-48 h-[320px]  m-3  lg:hidden rounded-lg p-1  shadow-2xl bg-richblack-700 "></div>
+                    <div className=" md:hidden  w-36 h-[247px]  m-2 sm:m-3  lg:hidden rounded-lg p-1  shadow-2xl bg-richblack-700"></div>
+                
+                </div>)
+          
+               }
+            ) }
 
-        </div>    
-
+        </div> 
+           
         </>
     )
 }
