@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from '../../../slices/PaginationSlice';
 import { movieCategoryName, moviesList } from '../../../utils/constant';
 import { setSearchText } from '../../../slices/SearchTextSlice';
+import Shimmer from '../../common/Shimmer';
 
 export const CategoryMovies = ({movieText}) => {
 
@@ -48,6 +49,8 @@ export const CategoryMovies = ({movieText}) => {
 
      },[]);
 
+     
+    if((allMovies.length==0)) { return <Shimmer/>} 
 
      const filteredMovies =filterDataType(searchText,allMovies);
      const NumOfPage=(Math.ceil(filteredMovies?.length/ItemInOnePage));

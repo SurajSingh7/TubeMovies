@@ -1,21 +1,15 @@
 import axios from 'axios';
-import { rapidapiHost, streamUrl } from './secrets';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 
 import getYouTubeID from 'get-youtube-id';
-import { rapidapiKey1,rapidapiKey2 } from './secrets';
 import { setUrlData } from '../slices/urlData';
 import { useDispatch } from 'react-redux';
 
 
-;
-
-
-
-// const rapidapiKey1=process.env.rapidapiKey1;
-// const rapidapiKey2=process.env.rapidapiKey2;
-// const rapidapiHost=process.env.rapidapiHost;
-// const streamUrl=process.env.streamUrl;
+const rapidapiKey1=process.env.REACT_APP_RAPIDAPI_KEY1;
+const rapidapiKey2=process.env.REACT_APP_RAPIDAPI_KEY2;
+const rapidapiHost=process.env.REACT_APP_RAPIDAPI_HOST;
+const streamUrl=process.env.REACT_APP_STREAM_URL;
 
 
 const useStreamLink=(youtubeUrl)=>{
@@ -23,8 +17,6 @@ const useStreamLink=(youtubeUrl)=>{
   var youtubeId = getYouTubeID(youtubeUrl);
   const dispatch=useDispatch();
   
-    // const[urlInfo,setUrlInfo]=useState(null);
-    // let urlInfo="";
 
     useEffect(()=>{
       getYoutubeUrlInfo();
@@ -51,9 +43,7 @@ const useStreamLink=(youtubeUrl)=>{
            try{
                 options.headers['X-RapidAPI-Key']=rapidapiKey2;
                 response = await axios.request(options);
-                // setUrlInfo(response.data);
                 dispatch(setUrlData(response.data));
-                // urlInfo=response.data;
              } catch (error) {
                console.error(error);
              }
@@ -61,7 +51,6 @@ const useStreamLink=(youtubeUrl)=>{
 
    }
 
-  // return urlInfo;
   
 }
 

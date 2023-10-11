@@ -6,7 +6,6 @@ import { SearchFilter } from "../components/common/SearchFilter"
 import { Link, Outlet } from "react-router-dom"
 
 
-
 function Home() {
 
   return (
