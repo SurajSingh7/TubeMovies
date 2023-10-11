@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import Shimmer from "../../common/Shimmer";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setFilter } from "../../../slices/MoviesFilterSlice";
+import { setDataEmptyError, setFilter } from "../../../slices/MoviesFilterSlice";
 import { SearchFilter } from "../../common/SearchFilter";
 import { setPage } from "../../../slices/PaginationSlice";
 import { apiConnector } from "../../../services/apiconnector";
 import { createMovieEndpoint } from "../../../services/apis";
+import { setSearchText } from "../../../slices/SearchTextSlice";
+import ScrollToTop from "../../../utils/scrollToTop";
 
 
 
@@ -37,6 +39,9 @@ const Body=()=>{
 
               setAllMovies(Allmovies);
               dispatch(setFilter(Allmovies));
+              dispatch(setPage(1));
+              dispatch(setSearchText(""));
+              dispatch(setDataEmptyError(""));
               
             } catch (error) {
               console.log(error);
@@ -50,7 +55,7 @@ const Body=()=>{
        
        <>
        <div className="mt-5">
-     
+      
 
       {/* <div className="search-container p-6 h-8 bg-pink-50  items-center flex justify-center "> */}
            

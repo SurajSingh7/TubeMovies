@@ -1,7 +1,7 @@
 export const NavigationLink = [
     {
       title: "ALL IN ONE",
-      path: "/category/all9",
+      path: "/",
     },
     {   
       title: "BOLLWOOD MOVIES",

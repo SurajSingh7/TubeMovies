@@ -65,15 +65,34 @@ function Navbar() {
         {/* Navigation links */}
         <nav className=" flex ">
             <div className="  hidden sm:block sm:w-2 xl:w-36 lg:w-9"> </div>
-          <ul className="flex    md:gap-4 lg:gap-x-8 font-semibold text-[17px] text-richblack-25 items-center">
+          <ul className="flex    md:gap-4 lg:gap-x-8 font-semibold text-[15.5px] text-richblack-50 items-center">
             {NavbarLinks.map((link, index) => (
               <li key={index}>
 
                   <Link to={link?.path}>
-                    <p className={`${  matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25" } hidden md:block `}>
+                    <p className={`${  matchRoute(link?.path) ? "text-[#7FFFD4]" : "text-richblack-50" } hidden md:block shadow-[1px_-1px_8px_-2px] shadow-richblue-300  hover:scale-105 rounded-md bg-richblack-900   ">
+             p-1 `}>
                       {link.title}
                     </p>
                   </Link>
+
+
+                  {/* <Link to={link?.path} >
+                    <div className="   group  shadow-[1px_-1px_8px_-2px] shadow-richblue-500 w-fit rounded-md bg-richblack-900  p-1 font-semibold text-richblack-50  transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
+            
+                        <p className={`${  matchRoute(link?.path) ? "text-[#7FFFD4]" : " " } text-sm`}>
+                        {link.title}</p>
+
+                    
+                    </div>
+                  </Link> */}
+
+
+
+
+
+
+
 
               </li>
             ))}

@@ -4,12 +4,11 @@ import {  useParams } from 'react-router-dom'
 
 import { apiConnector } from '../services/apiconnector';
 import { createMovieEndpoint } from '../services/apis';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { UrlNetworkStream } from '../components/core/WatchMovie/UrlNetworkStream';
 import HighlightText from '../components/core/WatchMovie/HighLightText';
 import RandomMovies from '../components/core/WatchMovie/RandomMovies';
 import Footer from '../components/common/Footer';
-import { setUrlData } from '../slices/urlData';
 import Shimmer from '../components/common/Shimmer';
 
 
@@ -88,17 +87,25 @@ if(!movie)
                    </div>
 
                   <div className='flex justify-center -mr-7'> 
-                     <button className=' bg-caribbeangreen-200 items-center  text-richblack-900  p-1 flex justify-center  rounded-md m-5 font-extrabold text-lg'> Add To Favorate</button> 
+                     <button className=' bg-caribbeangreen-200 items-center hover:scale-95   text-richblack-900  p-1 flex justify-center  rounded-md m-5 font-extrabold text-lg'> Add To Favorate</button> 
                   </div>
 
                </div>
 
+
                 {/* video */}
                <div className=' border-b-pure-greys-800  border-2 border-richblack-500 '>
+
                     <video controls= "controls" id="player" tabindex="0"  muted poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
                      autoplay="autoplay" loop="loop"  width="100%" src={link} >
                    </video>
                </div>
+
+
+               {/* <div className=' border-b-pure-greys-800  mt-5 border-2 border-richblack-500 bg-white w-[112%] h-auto  '>
+                    <iframe allowFullScreen style={{ width:"200%", height:"100vh"}}  src="https://embed.smashystream.com/playere.php?tmdb=4251"> </iframe>
+              </div> */}
+
          </div>
 
 
@@ -108,7 +115,7 @@ if(!movie)
 
      {/* sec-4  */}
      <div className=' lg:hidden flex justify-center'>
-        <div className=' bg-caribbeangreen-200 items-center  text-richblack-900  p-1 flex justify-center  rounded-md m-5 font-extrabold text-lg'> 
+        <div className=' bg-caribbeangreen-200 items-center hover:scale-95  text-richblack-900  p-1 flex justify-center  rounded-md m-5 font-extrabold text-lg'> 
          <button> Add To Favorate</button> 
         </div>
     </div>

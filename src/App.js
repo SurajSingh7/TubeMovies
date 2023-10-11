@@ -23,12 +23,12 @@ import Settings from "./components/core/Dashboard/Settings";
 import {useSelector } from "react-redux";
 
 
-import Cart from "./components/core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import { WatchMovie } from "./pages/WatchMovie";
 import { AddMovie } from "./components/core/Dashboard/AddMovie/AddMovie";
 import { Category } from "./pages/Category";
 import { YouttubePlayer } from "./pages/YouttubePlayer";
+import Body from "./components/core/HomePage/Body";
 
 
 
@@ -46,8 +46,12 @@ function App() {
    
     <Routes>
 
-      <Route path="/" element={<Home/>} />
-      <Route path="/category/:name" element={<Category/>} />
+
+      <Route  element={ <Home/> }>
+          <Route path="/" element={<Body/>} />
+          <Route path="/category/:name" element={<Category/>} />
+      </Route>
+
       
       <Route path="movie/:movieId" element={<WatchMovie/>} />
       
