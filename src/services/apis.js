@@ -1,5 +1,4 @@
-const BASE_URL = "https://proud-ruby-turtleneck.cyclic.app/"
-
+const BASE_URL = "https://proud-ruby-turtleneck.cyclic.app/api/v1"
 
 // AUTH ENDPOINTS
 export const endpoints = {
