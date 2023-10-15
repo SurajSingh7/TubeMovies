@@ -1,7 +1,6 @@
 
 import { useSelector } from "react-redux"
 
-import SignupForm from "../../../core/Auth/SignupForm"
 import AddMovieForm from "./AddMovieForm";
 
 function AddMovieTemplate({ title, description1, description2, image, formType }) {
@@ -24,7 +23,7 @@ function AddMovieTemplate({ title, description1, description2, image, formType }
                 {description2}
               </span>
             </p>
-            {formType === "signup" ? <AddMovieForm/> :""}
+            {formType === "addMovie" ? <AddMovieForm/> :""}
           </div>
 
 

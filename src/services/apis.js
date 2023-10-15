@@ -1,6 +1,6 @@
-// const BASE_URL = "https://proud-ruby-turtleneck.cyclic.app/api/v1"
+const BASE_URL = "https://tube-movies-backend.vercel.app/api/v1"
 
-const BASE_URL = "http://localhost:4000/api/v1"
+// const BASE_URL = "http://localhost:4000/api/v1"
 
 
 // AUTH ENDPOINTS

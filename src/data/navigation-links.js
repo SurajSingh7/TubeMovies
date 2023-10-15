@@ -24,8 +24,8 @@ export const NavigationLink = [
     path: "/category/hollywoodHindi5",
     },
     {
-        title: "ANIMATION MOVIES ",
-        path: "/category/animationMovies6",
+        title: "COMEDY MOVIES ",
+        path: "/category/comedyMovies6",
     },
     {
       title: "HINDI DUBBED MOVIES",

@@ -1,5 +1,5 @@
 
-export const movieCategoryName=["All In One","Bollwood","South Hindi","Popular Movies","Old Is Gold","Hollywood","Animation Movies","Hindi Dubbed"];
+export const movieCategoryName=["All In One","Bollwood","South Hindi","Popular Movies","Old Is Gold","Hollywood","Comedy Movies","Hindi Dubbed"];
 
   
   // id,name,image,url,movieType
