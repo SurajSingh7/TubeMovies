@@ -48,18 +48,13 @@ const RandomMovies=()=>{
       <div className=" mb-3 mx-12  text-richblack-100  text-xl sm:text-3xl md:text-4xl font-bold flex gap-4">  <HighlightText text={"You may also like"}/></div>
       <div className="bg-richblack-600 w-[93%] m-1 mx-12 flex justify-center items-center h-[0.1px]"></div>
 
-          <div className="flex flex-wrap  justify-center   sm:justify-center  xl:justify-evenly items-center text-center ">
+          <div className="flex flex-wrap gap-5 lg:gap-7 m-4">
 
                       {
                       allMovies.slice(0,20).map((movie) =>{
                           return(
-                              // <Link to={"/movie/"+movie._id} key={movie._id} >
-                              //   <MovieCard {...movie} />
-                              // </Link>  
-
-                              <a href={"/movie/"+movie._id} key={movie._id} >
-                                  <MovieCard {...movie} />
-                                </a>  
+                           
+                                  <MovieCard  movie={movie}  key={movie?._id} path={true}/>
                           );
                       })
                     }

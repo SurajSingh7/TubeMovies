@@ -4,21 +4,17 @@ import {  useParams } from 'react-router-dom'
 
 import { apiConnector } from '../services/apiconnector';
 import { createMovieEndpoint } from '../services/apis';
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { UrlNetworkStream } from '../components/core/WatchMovie/UrlNetworkStream';
 import HighlightText from '../components/core/WatchMovie/HighLightText';
 import RandomMovies from '../components/core/WatchMovie/RandomMovies';
 import Footer from '../components/common/Footer';
 import Shimmer from '../components/common/Shimmer';
 
-
-
-
 export const WatchMovie = () => {
 
   const {movieId}=useParams();
   const [movie,setMovie]=useState(null);
-
   useEffect(()=>{
 
    (async function getMovies() {
@@ -27,6 +23,7 @@ export const WatchMovie = () => {
      const res = await apiConnector("GET", createMovieEndpoint.GETMOVIES_API);
      const movieData=res?.data?.data?.filter( (movie) => movie?._id=== movieId )[0];
      setMovie(movieData);
+
 
     } catch (error) {
       console.log(error);
@@ -54,12 +51,14 @@ export const WatchMovie = () => {
 
  
   
-if(!movie) 
+if(!movie) {
    return (<div> 
       <div className='bg-richblack-800 h-8 animate-pulse'></div>
       <div className='bg-richblack-700 h-8 animate-pulse'></div>
       <Shimmer/>
      </div>);
+
+   }
 
 
   return (

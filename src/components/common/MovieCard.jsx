@@ -1,51 +1,34 @@
 // Movie card component: Image, name, cuisine
-const MovieCard= ({ image, name, }) => {
+import { motion } from 'framer-motion'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useNavigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
+const MovieCard= ({ movie ,path}) => {
+          
+      const name=movie?.name;
+      const image=movie?.image;
+      const navigate=useNavigate();
 
-     name=name.slice(0,18);
+
+
+    //  name=name.slice(0,18);
  
     return (
 
 
       <>
+        <div className=" movieCard  hover:scale-105  rounded-lg shadow-[1px_-1px_8px_-2px] shadow-richblue-300 sm:w-[22.5%] md:w-[22.96%] lg:w-[17.7%]" 
+        onClick={ (path)? ()=> {  window.open(`/movie/${movie?._id}`,"_self")  }:() => navigate(`/movie/${movie?._id}`) }
 
-     <div className="hover:scale-105">
-      {/* For pc */}
-      <div className=" hidden lg:block   mb-5 mt-3  w-52 h-[350px]   m-3 xl:m-3  rounded-lg p-1  shadow-2xl bg-richblack-800 ">
-         
-        <div className="">
-        <img className=" w-[200px] h-[300px] items-center"  src={image} />
-        <h2 className=" my-2 font-bold text-white">{name}</h2>
-        </div> 
-       
-      </div>
+       >
+            <div className="posterBlock ">
+                 <img src={image} className='lazy-load-image-background'/>
+            </div>
 
-
-       {/* For tablet */}
-      <div className="   hidden md:block  w-48 h-[320px]  m-3  lg:hidden rounded-lg p-1  shadow-2xl  ">
-         
-         <div className="">
-         <img className=" w-[184px] h-[276px] items-center"  src={image} />
-         <h2 className=" my-2 font-bold text-white">{name}</h2>
-         </div> 
-        
-       </div>
-
-
-
-       {/* For mobile */}
-
-       <div className="  md:hidden  w-36 h-[247px]  m-2 sm:m-3  lg:hidden rounded-lg p-1  shadow-2xl  ">
-         
-         <div className="">
-         <img className=" w-[138px] h-[207px] items-center"  src={image} />
-         <h2 className=" my-2 font-semibold text-sm text-white">{name}</h2>
-         </div> 
-        
-       </div>
-
-       </div>
-
-
+            <div className="">
+               <h2 className="  font-bold flex justify-center  mt-2 mb-2 items-center text-white">{name}</h2>
+            </div>
+        </div>
       </>
     );
   };

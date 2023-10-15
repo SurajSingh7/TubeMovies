@@ -4,15 +4,15 @@ const Shimmer =()=>{
        
         <>
     
-        <div className=" flex flex-wrap  justify-center   sm:justify-center  xl:justify-evenly items-center text-center">
+        <div className="flex flex-wrap gap-5 lg:gap-7 m-4">
            {   Array(20).fill("").map(   (e,index)=> { return (
-               <div key={index} className="animate-pulse mt-5"> 
-                
-                    <div className="hidden lg:block   mb-5 mt-3  w-52 h-[350px]   m-3 xl:m-3  rounded-lg p-1  shadow-2xl bg-richblack-700 "></div>
-                    <div className=" hidden md:block  w-48 h-[320px]  m-3  lg:hidden rounded-lg p-1  shadow-2xl bg-richblack-700 "></div>
-                    <div className=" md:hidden  w-36 h-[247px]  m-2 sm:m-3  lg:hidden rounded-lg p-1  shadow-2xl bg-richblack-700"></div>
-                
-                </div>)
+         
+
+                <div className="mt-5 bg-richblack-800 animate-pulse movieCard rounded-lg sm:w-[22.5%] md:w-[22.96%] lg:w-[17.7%]" >
+                    <div className="posterBlock "> </div>
+                </div>
+    
+                )
           
                }
             ) }

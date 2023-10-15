@@ -38,6 +38,7 @@ const useStreamLink=(youtubeUrl)=>{
       try{
           var response = await axios.request(options);
           dispatch(setUrlData(response.data));
+          console.log(response);
       } catch (error) {
          
            try{
