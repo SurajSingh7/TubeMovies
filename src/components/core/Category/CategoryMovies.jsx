@@ -58,7 +58,7 @@ export const CategoryMovies = ({movieText}) => {
     
 
   return (
-    <div className='mt-1'>
+    <div className='mt-5 '>
 
 
           <div className="h-8 -mb-1 mx-12  text-richblack-100  text-sm font-semibold flex gap-3"> Archive By Category "{categoryName}"  </div>
