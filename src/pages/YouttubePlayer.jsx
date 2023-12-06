@@ -1,105 +1,147 @@
-import React, { useState } from 'react'
-import useStreamYoutube from '../utils/useStreamYoutube';
-import { UrlNetworkStream } from '../components/core/WatchMovie/UrlNetworkStream';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import getYouTubeID from 'get-youtube-id';
+import { toast } from "react-hot-toast"
+import ContactBanner from '../components/ContactPage/ContactBanner';
+import Footer from '../components/common/Footer';
+import banner from "../../src/assets/Images/signup.jpg"
+import HighlightText from '../components/core/WatchMovie/HighLightText';
+// import banner from "../../assets/Images/signup.jpg"
 
 export const YouttubePlayer = () => {
 
   const [url, setUrl] = useState("");
-  let link=null;
-  const [flag, setFlag] = useState(false);
-  const {urlData} = useSelector((state)=>state.urlData);
+  const [flag, setFlag] = useState(true);
+  const [link, setLink] = useState("");
+  const [youtubeId, setyoutubeId] = useState("");
+
+  useEffect(()=>{
+
+    (async function getData() {
+     try {
+          if(youtubeId){
+            var toastId = toast.loading("Loading...")
+            var response=await fetch(`https://utube-api.vercel.app/api/v1/utube/${youtubeId}`);
+            var data=await response?.json();
+            setLink(data?.data?.formats[2]?.url);
+            toast.dismiss(toastId);
+            toast.success("Done 💕");
+            } 
+       
+     } catch (error) {
+       console.log(error);
+        toast.dismiss(toastId);
+        toast.error("Sorry! Link was not found.")
+     }
+   })();
+
+ },[youtubeId,flag]);
+
+
+
+  console.log("suraj 3");
 
   function playVideo(){
-      console.log(url);
-      setFlag(true);
-
-      console.log(urlData,urlData?.status);
-
+     setLink("");
+     setFlag(!flag)
+     var id = getYouTubeID(url);
+     if(id==null) toast.error("Enter vaild url 🤔");
+     console.log(id,"s4");
+     setyoutubeId(id);
   }
 
 
   return (
 
+    <>
 
-        <div className='font-extrabold text-3xl text-richblack-50 m-3 justify-center items-center h-screen w-11/12 mx-auto max-w-maxContent'>
+    <div className="mx-auto  flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row  h-screen">
 
-          { (flag) && < UrlNetworkStream url={url} />}
-          
-          {/* section-1 */}
-          <div>
-            <div className=' text-[#0f9d58] flex justify-center sm:text-3xl text-xl'>U-Tube Player</div>
-            <div className='flex justify-center text-xs font-bold italic m-2 sm:hidden'>Watch any youtube video without ad's. </div>
-            <div className=' justify-center text-sm font-bold italic m-2 hidden sm:flex'>you can Watch any youtube video without any ad's through youtube url.</div>
-          </div>
-
-          {/* section-2*/}
-          <div className="  items-center flex justify-center h-12  mt-8">
-            
-                <input type="text" className=" text-sm sm:text-lg font-bold text-richblack-900  outline-pink-200
-                  w-[90%]  sm:w-[65%]   md:w-[50%]   lg:w-[40%]  rounded-md h-10 sm:h-10 flex " 
-                  placeholder="  Enter youtube video url " 
-                  value={url}   onChange={(e)=>{ setUrl(e.target.value); setFlag(false) }} 
-                />
-                  
-
-                <button className="  bg-gray-500    font-bold rounded-md  -mx-[86px]  pl-2 pr-1 h-[37px]
-                  bg-[#0f9d58]  text-[#fff]  "  onClick={ playVideo }> 
-                   Play!
-                 </button>
-                 
-                 <button className="p-1 pl-3 pr-[9px] invisible"> 
-                   Play!
-                 </button>
-
-          </div>
-
-          {/* section-3 */}
-          <div className='mt-8'>
-            <div className=' flex-col items-center hidden sm:flex'>
-                <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
-                  autoplay="autoplay"     loop="loop"  width="50%" src={ (urlData?.status==="fail")?null:urlData?.formats[2]?.url} >
-               </video>
-            </div>
+      <div className=''>
+        <div className='font-extrabold text-3xl text-richblack-50 m-3 justify-center items-center  w-11/12 mx-auto max-w-maxContent'>
 
 
-            <div className='flex flex-col items-center sm:hidden'>
-                <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
-                  autoplay="autoplay"     loop="loop" width="100%"  src={ (urlData?.status==="fail")?null:urlData?.formats[2]?.url} >
-               </video>
-            </div>
+                
+        {/* section-1 */}
+        <div className=' text-[#0f9d58] flex justify-center sm:text-3xl text-[30px] '>U-Tube Player</div>
+       
 
+        {/* section-2*/}
+        <div className="  items-center flex justify-center h-12  mt-6">
 
-          </div>
-
-          
-
-
-        </div>  
-      
-      // {/* { (flag) && < UrlNetworkStream url={url} />} */}
-          
-
-          /* <div className=" p-6 h-8  items-center flex justify-center ">
-            
-            <input type="text" className="  w-[75%]  sm:w-[65%]   md:w-[50%] outline-none  lg:w-[36%]  rounded-none h-8 flex " placeholder="  Search movies here..."
-              value={url}   onChange={(e)=>{ setUrl(e.target.value); setFlag(false) }} 
+            <input type="text" className=" text-xs font-bold text-richblack-900  outline-none 
+              w-[90%]  sm:w-[65%]   md:w-[50%]   lg:w-[55%]  rounded-md h-10 sm:h-10 flex " 
+              placeholder=" Enter youtube video url " 
+              value={url}   onChange={(e)=>{ setUrl(e.target.value)}} 
             />
               
-            <button className="p-[4.4px]  bg-gray-500    font-bold rounded-none   bg-[#0f9d58] hover:bg-caribbeangreen-500 text-[#fff]  " 
-             onClick={ playVideo }
-            >  
-             Play</button>
+            <div className='bg-white rounded-md p-[1.06px] -mx-[10px]'>
+              <button className="  bg-gray-500    font-bold rounded-md   pl-2 pr-1 h-[37px]  hover:bg-pink-200 hover:scale-95
+                bg-[#0f9d58]  text-[#fff]  "  onClick={ playVideo }> 
+                  Play!
+              </button>
 
-          </div> */
+            </div>
+            
+
+        </div>
 
 
-          /* <div>
-              <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
-                  autoplay="autoplay"     loop="loop"  width="50%" src={ (urlData?.status==="fail")?null:urlData?.formats[2]?.url} >
-               </video>
-          </div> */
+        {/* section-3 */}
+        <div className='mt-8'>
+        <div className=' flex-col items-center hidden sm:flex'>
+            <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v169616189/moviesstart_lxwu0v.jpg" 
+              autoplay="autoplay"     loop="loop"  width="80%" src={link} >
+            </video>
+        </div>
 
+
+        <div className='flex flex-col items-center sm:hidden'>
+            <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
+              autoplay="autoplay"     loop="loop" width="100%"  src={link} >
+            </video>
+        </div>
+
+
+        </div>
+
+
+
+
+        </div>
+      </div>
+        
+    {/* Banner Details */}
+      <div className='lg:w-[50%] mt-5 rounded-2xl invisible lg:visible '>
+
+      
+      
+
+        <div className="flex flex-col gap-6 rounded-xl bg-richblack-800 p-4 lg:p-6">
+
+        <div className=' lg:text-lg xl:text-2xl flex justify-center items-center   font-bold  pl-8 p-2 shadow-[10px_-5px_45px_-5px] shadow-caribbeangreen-200 rounded-xl hover:scale-105'>
+          <HighlightText text={ "Watch any youtube video Without ad's" }/>
+        </div>
+    
+
+          <img src={banner} alt="banner" loading="lazy" className=" shadow-[10px_-5px_45px_-5px] shadow-caribbeangreen-300 hover:scale-105" />
+          {/* #DC143C */}
+
+        </div>
+      </div>  
+
+  
+  </div>
+
+  <Footer/>
+
+  </>
+
+
+
+     
+
+
+      
 
 
   )

@@ -19,9 +19,6 @@ const Contact = () => {
 
 
         <div className="h-10"></div>
-    
-    
-          {/* <Footer /> */}
           <Footer />
 
     </div>
