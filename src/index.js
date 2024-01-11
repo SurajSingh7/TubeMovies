@@ -11,12 +11,10 @@ import {configureStore} from "@reduxjs/toolkit"
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./utils/scrollToTop";
 
-
     const store = configureStore({
                    reducer:rootReducer,
                    });
  
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(

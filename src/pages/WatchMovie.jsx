@@ -1,55 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import {  useParams } from 'react-router-dom'
-
-
 import { apiConnector } from '../services/apiconnector';
 import { createMovieEndpoint } from '../services/apis';
-import {  useDispatch, useSelector } from 'react-redux';
-import { UrlNetworkStream } from '../components/core/WatchMovie/UrlNetworkStream';
 import HighlightText from '../components/core/WatchMovie/HighLightText';
 import RandomMovies from '../components/core/WatchMovie/RandomMovies';
 import Footer from '../components/common/Footer';
 import Shimmer from '../components/common/Shimmer';
+import getYouTubeID from 'get-youtube-id';
 
 export const WatchMovie = () => {
 
   const {movieId}=useParams();
   const [movie,setMovie]=useState(null);
+
+  const [link, setLink] = useState("");
+
   useEffect(()=>{
 
    (async function getMovies() {
     try {
 
-     const res = await apiConnector("GET", createMovieEndpoint.GETMOVIES_API);
-     const movieData=res?.data?.data?.filter( (movie) => movie?._id=== movieId )[0];
-     setMovie(movieData);
+            const res = await apiConnector("GET", createMovieEndpoint.GETMOVIES_API);
+            const movieData=res?.data?.data?.filter( (movie) => movie?._id=== movieId )[0];
+            setMovie(movieData);
 
+            var id = getYouTubeID(movieData?.url);
+            var response=await fetch(`https://utube-api.vercel.app/api/v1/utube/${id}`);
+            var data=await response?.json();
 
+            
+            let vaildUrl=data?.data?.formats[2]?.url;
+            if(!vaildUrl){
+              vaildUrl=data?.data?.formats[1]?.url;
+            }
+            setLink(vaildUrl);
+          
+          
     } catch (error) {
       console.log(error);
     }
   })();
 
-},[movieId,movie]);
+},[]);
 
 
 
 // id,name,image,url,movieType,
-  const linkType=movie?.linkType;
   const image=movie?.image;
   const movieName=movie?.name;
-  let link="";
- 
-  const {urlData} = useSelector((state)=>state.urlData);
-
-
-  if(linkType=="Youtube"){
-     link=urlData?.formats[2]?.url;
-  }else{
-    link=movie?.url;
-  }
-
- 
+  console.log("suraj 3");
   
 if(!movie) {
    return (<div> 
@@ -64,8 +63,7 @@ if(!movie) {
   return (
     <>
     <div className=' mx-auto   flex w-11/12  max-w-maxContent flex-col justify-between '>
-    
-   { (movie?.url && linkType=="Youtube") && < UrlNetworkStream url={movie?.url} />}
+  
 
    {/*sec-1 path */}
      <div className='mt-3 mb-7 text-richblack-100 font-extrabold text-xl flex   justify-center items-center ' >
@@ -95,9 +93,17 @@ if(!movie) {
                 {/* video */}
                <div className=' border-b-pure-greys-800  border-2 border-richblack-500 '>
 
-                    <video controls= "controls" id="player" tabindex="0"  muted poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
-                     autoplay="autoplay" loop="loop"  width="100%" src={link} >
+                    <video controls= "controls" id="player"  muted poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
+                     autoplay={"autoplay"}  loop="loop"  width="100%" src={link} >
                    </video>
+
+                
+
+                 {console.log(link,"suraj444")}
+                   
+
+                   
+                   
                </div>
 
 

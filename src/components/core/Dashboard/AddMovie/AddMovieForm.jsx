@@ -49,6 +49,12 @@ function AddMovieForm() {
 
     dispatch( createMovie( LinkType, name, url, image,category,navigate) );
 
+        // or
+
+    // var x=createMovie( LinkType, name, url, image,category,navigate);
+    // x(dispatch);
+
+
 
     // Reset name, url, image, category
     setFormData({ name: "", url: "", image: "", category: ""});
@@ -77,7 +83,6 @@ function AddMovieForm() {
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
        
-      
          {/* Movie Name */}
           <label>
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">

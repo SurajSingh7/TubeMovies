@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import getYouTubeID from 'get-youtube-id';
 import { toast } from "react-hot-toast"
-import ContactBanner from '../components/ContactPage/ContactBanner';
 import Footer from '../components/common/Footer';
 import banner from "../../src/assets/Images/signup.jpg"
 import HighlightText from '../components/core/WatchMovie/HighLightText';
-// import banner from "../../assets/Images/signup.jpg"
 
 export const YouttubePlayer = () => {
 
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("https://youtu.be/wDheWYmNEhQ?si=IcDryIBXmaOWrXhB");
   const [flag, setFlag] = useState(true);
   const [link, setLink] = useState("");
   const [youtubeId, setyoutubeId] = useState("");
@@ -22,7 +20,13 @@ export const YouttubePlayer = () => {
             var toastId = toast.loading("Loading...")
             var response=await fetch(`https://utube-api.vercel.app/api/v1/utube/${youtubeId}`);
             var data=await response?.json();
-            setLink(data?.data?.formats[2]?.url);
+
+            let vaildUrl=data?.data?.formats[2]?.url;
+            if(!vaildUrl){
+              vaildUrl=data?.data?.formats[1]?.url;
+            }
+
+            setLink(vaildUrl);
             toast.dismiss(toastId);
             toast.success("Done 💕");
             } 
@@ -88,22 +92,15 @@ export const YouttubePlayer = () => {
 
         {/* section-3 */}
         <div className='mt-8'>
-        <div className=' flex-col items-center hidden sm:flex'>
-            <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v169616189/moviesstart_lxwu0v.jpg" 
-              autoplay="autoplay"     loop="loop"  width="80%" src={link} >
+        <div className=' flex-col items-center  sm:flex'>
+            <video className='w-[100%]  sm:w-[80%]' controls= "controls" id="player"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v169616189/moviesstart_lxwu0v.jpg" 
+               autoplay={"autoplay"} loop="loop"   src={link} >
             </video>
         </div>
 
-
-        <div className='flex flex-col items-center sm:hidden'>
-            <video controls= "controls" id="player" tabindex="0"  muted  poster="https://res.cloudinary.com/dxkxa0mkq/image/upload/v1696163189/moviesstart_lxwu0v.jpg" 
-              autoplay="autoplay"     loop="loop" width="100%"  src={link} >
-            </video>
-        </div>
-
+         {console.log(link,"su556")}
 
         </div>
-
 
 
 
@@ -114,8 +111,6 @@ export const YouttubePlayer = () => {
       <div className='lg:w-[50%] mt-5 rounded-2xl invisible lg:visible '>
 
       
-      
-
         <div className="flex flex-col gap-6 rounded-xl bg-richblack-800 p-4 lg:p-6">
 
         <div className=' lg:text-lg xl:text-2xl flex justify-center items-center   font-bold  pl-8 p-2 shadow-[10px_-5px_45px_-5px] shadow-caribbeangreen-200 rounded-xl hover:scale-105'>
@@ -130,7 +125,7 @@ export const YouttubePlayer = () => {
       </div>  
 
   
-  </div>
+   </div>
 
   <Footer/>
 
