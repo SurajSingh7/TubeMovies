@@ -24,6 +24,11 @@ export const YouttubePlayer = () => {
             let vaildUrl=data?.data?.formats[2]?.url;
             if(!vaildUrl){
               vaildUrl=data?.data?.formats[1]?.url;
+
+               if(!vaildUrl){
+                vaildUrl=data?.data?.formats[0]?.url;
+              }
+              
             }
 
             setLink(vaildUrl);
